@@ -1,0 +1,21 @@
+Setting
+1. vue.config.js change 
+    - indexPath 
+    - outputDir
+    - pages.index.entry -> XXXX999.js ex. demo002.js
+    - pages.index.title
+2. src folder change
+    - App.vue -> AppXXXX999.vue ex. AppDemo002.vue
+    - main.js -> XXXX999.js ex. demo002.js (depend on 1 pages.index.entry)
+        (change import App.vue -> AppXXXX999.vue too)
+
+Examine
+1. start assure project
+    goto https://github.com/willsofts/assure
+2. api try out
+    curl -X POST http://localhost:8080/api/demo002/retrieve -d account=1-0-12345-6
+
+In development mode you can setting environment before start up assure project
+set VALIDATE_TOKEN=false
+or
+export VALIDATE_TOKEN=false
