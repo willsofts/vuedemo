@@ -55,7 +55,8 @@ export function removeAccessorInfo() {
 export function sendMessageInterface(win) {
     let moderator = win?"opener":"parent";
 	let info = getAccessorInfo();
-	let msg = {type: "storage", moderator: moderator, API_URL: getApiUrl(), BASE_URL: getBaseUrl(), CDN_URL: getCdnUrl(), IMG_URL: getImgUrl(), DEFAULT_LANGUAGE: getDefaultLanguage(), API_TOKEN: getApiToken(), accessorinfo: info};
+    let options = getStorage("accessoptions");
+	let msg = {type: "storage", moderator: moderator, API_URL: getApiUrl(), BASE_URL: getBaseUrl(), CDN_URL: getCdnUrl(), IMG_URL: getImgUrl(), DEFAULT_LANGUAGE: getDefaultLanguage(), API_TOKEN: getApiToken(), accessorinfo: info, accessoptions: options};
 	return sendMessageToFrame(msg,win);
 }
 export function sendMessageToFrame(data,win) {
@@ -106,6 +107,7 @@ export function handleRequestMessage(data) {
         if(data.IMG_URL !== undefined) setImgUrl(data.IMG_URL);
         if(data.DEFAULT_LANGUAGE !== undefined) setDefaultLanguage(data.DEFAULT_LANGUAGE);
         if(data.API_TOKEN !== undefined) setApiToken(data.API_TOKEN);
+        if(data.accessoptions !== undefined) setStorage("accessoptions",data.accessoptions);
         if(data.accessorinfo) {
             saveAccessorInfo(data.accessorinfo);
         }
