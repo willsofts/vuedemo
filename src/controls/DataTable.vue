@@ -83,7 +83,10 @@ const tableSettings = {
 export default {
   props: {
     labels: Object,
-    dataset: Object,
+    dataset: {
+      type: Object,
+      default() { return {}; },
+    },
     settings: Object,
     formater: Function,
   },

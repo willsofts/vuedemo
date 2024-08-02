@@ -33,11 +33,11 @@ export default {
       default: "1.0.0",
     },
     viewVersion: {
-      type: Boolean,
+      type: [String,Boolean],
       default: true,
     },
     showLanguage: {
-      type: Boolean,
+      type: [String,Boolean],
       default: false,
     },
     multiLanguages: {

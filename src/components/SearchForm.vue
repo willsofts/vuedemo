@@ -82,7 +82,8 @@ export default {
     let filters = {};
     //select2 data options must in format {id:?, text:?}
     //const statusOptions = props.dataCategory.marrystatus.map((item) => { return {id: item.key, text: item.text}});
-    return { localData, tableSettings, pagingSettings, paging, filters };
+    const dataset = ref({});
+    return { localData, tableSettings, pagingSettings, paging, filters, dataset };
   },
   methods: {
     reset(newData) {
