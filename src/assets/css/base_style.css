@@ -374,3 +374,5 @@ a:hover { text-decoration: none; }
 .img-lang { width: 30px; height: 15px; }
 .img-lang-EN { content: url(../img/lang/EN.png); }
 .img-lang-TH { content: url(../img/lang/TH.png); }
+.input-group-lookup { border-radius: 0; }
+.input-group-clear { border-radius: 0 .25rem .25rem 0; }
