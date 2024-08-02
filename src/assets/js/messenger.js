@@ -1,4 +1,4 @@
-import { getApiUrl, getBaseUrl, getCdnUrl, getImgUrl, getDefaultLanguage, getApiToken, getBaseStorage, setApiUrl, setBaseUrl, setCdnUrl, setImgUrl, setDefaultLanguage, setApiToken  } from "./appinfo.js";
+import { getApiUrl, getBaseUrl, getCdnUrl, getImgUrl, getDefaultLanguage, getApiToken, getBaseStorage, setApiUrl, setBaseUrl, setCdnUrl, setImgUrl, setDefaultLanguage, setApiToken, getDefaultRawParameters  } from "./appinfo.js";
 import { DH } from "./dh.js";
 
 var messagingCallback;
@@ -98,17 +98,21 @@ export function sendMessageToOpener(data) {
     return false;
 }
 export function handleRequestMessage(data) {
+    console.log("handleRequestMessage: data",data);
     if(data.type=="storage") {
-        if(data.API_URL) setApiUrl(data.API_URL);
-        if(data.BASE_URL) setBaseUrl(data.BASE_URL);
-        if(data.CDN_URL) setCdnUrl(data.CDN_URL);
-        if(data.IMG_URL) setImgUrl(data.IMG_URL);
-        if(data.DEFAULT_LANGUAGE) setDefaultLanguage(data.DEFAULT_LANGUAGE);
-        if(data.API_TOKEN) setApiToken(data.API_TOKEN);
+        if(data.API_URL !== undefined) setApiUrl(data.API_URL);
+        if(data.BASE_URL !== undefined) setBaseUrl(data.BASE_URL);
+        if(data.CDN_URL !== undefined) setCdnUrl(data.CDN_URL);
+        if(data.IMG_URL !== undefined) setImgUrl(data.IMG_URL);
+        if(data.DEFAULT_LANGUAGE !== undefined) setDefaultLanguage(data.DEFAULT_LANGUAGE);
+        if(data.API_TOKEN !== undefined) setApiToken(data.API_TOKEN);
         if(data.accessorinfo) {
             saveAccessorInfo(data.accessorinfo);
         }
-        console.log("handleRequestMessage: accessor info",data.accessorinfo);
+        console.info("handleRequestMessage: accessor info",data.accessorinfo);
+        console.info("handleRequestMessage: DEFAULT_LANGUAGE="+getDefaultLanguage(),", BASE_STORAGE="+getBaseUrl(),", DEFAULT_RAW_PARAMETERS="+getDefaultRawParameters());
+        console.info("handleRequestMessage: API_URL="+getApiUrl(),", BASE_URL="+getBaseUrl(),", CDN_URL="+getCdnUrl(),", IMG_URL="+getImgUrl());
+        console.info("handleRequestMessage: API_TOKEN="+getApiToken());        
     }
     if(messagingCallback) messagingCallback(data);
 }
