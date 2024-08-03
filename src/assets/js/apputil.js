@@ -86,16 +86,16 @@ export function openNewWindow(settings) {
 		let fswin = getWindowByName(p.winName); 
 		if(fswin) { fswin.focus(); return; }  
 	} catch(ex) { console.error(ex); } 
-	let sw = window.screen.availWidth; 
-	let sh = window.screen.availHeight; 
-	let wx = (sw - p.windowWidth) / 2; 
-	let wy = (sh - p.windowHeight) / 2; 
-	let fs_features = "top="+wy+",left="+wx+",width="+p.windowWidth+",height="+p.windowHeight+","+p.windowFeatures;
 	let fs_window = null;
 	if(p.newTab) {
 		if(p.params) fs_window = window.open("",p.windowName); 
 		else fs_window = window.open(p.url,p.windowName); 	
 	} else {
+		let sw = window.screen.availWidth; 
+		let sh = window.screen.availHeight; 
+		let wx = (sw - p.windowWidth) / 2; 
+		let wy = (sh - p.windowHeight) / 2; 
+		let fs_features = "top="+wy+",left="+wx+",width="+p.windowWidth+",height="+p.windowHeight+","+p.windowFeatures;
 		if(p.params) fs_window = window.open("",p.windowName,fs_features); 
 		else fs_window = window.open(p.url,p.windowName,fs_features); 	
 	}
