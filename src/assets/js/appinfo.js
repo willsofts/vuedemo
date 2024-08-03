@@ -29,3 +29,18 @@ export function setCdnUrl(value) { CDN_URL = value; }
 export function setImgUrl(value) { IMG_URL = value; }
 export function setBaseStorage(value) { BASE_STORAGE = value; }
 export function setDefaultRawParameters(value) { DEFAULT_RAW_PARAMETERS = value; }
+
+var default_labels = [];
+var program_labels = [];
+var program_message = [];
+export function getProgramMessage() { return program_message; }
+export function getDefaultLabels() { return default_labels; }
+export function getProgramLabels() { return program_labels; }
+export function setProgramMessage(message) { program_message = message; }
+export function setDefaultLabels(labels) { default_labels = labels; }
+export function setProgramLabels(labels) { program_labels = labels; }
+export function appInit(settings = {program_message,default_labels,program_labels}) {
+	setProgramMessage(settings.program_message);
+	setDefaultLabels(settings.default_labels);
+	setProgramLabels(settings.program_labels);
+}

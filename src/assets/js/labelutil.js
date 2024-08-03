@@ -1,10 +1,9 @@
-import { getDefaultLanguage } from "./appinfo";
-
-import default_labels from '../json/default_label.json';
-import program_labels from '../json/program_label.json';
+import { getDefaultLanguage, getDefaultLabels, getProgramLabels } from "./appinfo";
 
 export function getLabel(name, defaultLabel, lang = getDefaultLanguage()) {
     let result = undefined;
+    let default_labels = getDefaultLabels();
+    let program_labels = getProgramLabels();
     if(!lang || lang.trim().length==0) lang = "EN";
     let label_item = getLabelItem(name,lang,program_labels);
     if(label_item) {
@@ -38,6 +37,8 @@ export function getLabelObject(lang = getDefaultLanguage(), label_category) {
 }
 
 export function getLabelModel(lang = getDefaultLanguage()) {
+    let default_labels = getDefaultLabels();
+    let program_labels = getProgramLabels();
     let default_item = getLabelObject(lang, default_labels);
     let program_item = getLabelObject(lang, program_labels);
     let default_model = {};

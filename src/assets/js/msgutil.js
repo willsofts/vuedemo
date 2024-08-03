@@ -1,12 +1,11 @@
-import { getDefaultLanguage } from "./appinfo";
-
-import messages from '../json/smart_message.json';
+import { getDefaultLanguage, getProgramMessage } from "./appinfo";
 
 export function getMessageCode(errcode, params, defaultMessage) {
     if(errcode && errcode.trim().length>0) {
+		let program_message = getProgramMessage();
         let lang = getDefaultLanguage();
         if(!lang || lang.trim().length==0) lang = "EN";
-		let msg = messages.find((item) => { return item.code == errcode; });
+		let msg = program_message.find((item) => { return item.code == errcode; });
 		if(msg) {
 			let text = msg[lang];
 			if(text && text.trim().length>0) {

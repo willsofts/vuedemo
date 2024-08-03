@@ -16,7 +16,7 @@ import PageHeader from '@/controls/PageHeader.vue';
 import SearchForm from '@/components/SearchForm.vue';
 import EntryForm from '@/components/EntryForm.vue';
 import { getLabelModel } from "@/assets/js/labelutil.js";
-import { DEFAULT_CONTENT_TYPE, getDefaultLanguage, getApiUrl } from "@/assets/js/appinfo.js";
+import { DEFAULT_CONTENT_TYPE, getDefaultLanguage, setDefaultLanguage, getApiUrl } from "@/assets/js/appinfo.js";
 import { startApplication, serializeParameters } from "@/assets/js/apputil.js";
 
 export default {
@@ -54,6 +54,7 @@ export default {
       console.log("messagingHandler: data",data); 
     },
     changeLanguage(lang) {
+      setDefaultLanguage(lang);
       let labelModel = getLabelModel(lang);
       this.labels = labelModel;
       this.resetDataCategories(lang);
