@@ -1,8 +1,8 @@
 import $ from "jquery"
 import bootbox from "bootbox"
-import { getMessageCode } from "./msgutil"
+import { getMessageCode } from "./msg.util"
 import { getAccessorToken, requestAccessorInfo, getDH } from "./messenger";
-import { getDefaultRawParameters, getDefaultLanguage } from "./appinfo";
+import { getDefaultRawParameters, getDefaultLanguage } from "./app.info";
 
 const fs_winary = new Array();
 export function getWindowByName(winname) {

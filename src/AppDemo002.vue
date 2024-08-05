@@ -15,9 +15,9 @@ import $ from "jquery";
 import PageHeader from '@/controls/PageHeader.vue';
 import SearchForm from '@/components/SearchForm.vue';
 import EntryForm from '@/components/EntryForm.vue';
-import { getLabelModel } from "@/assets/js/labelutil.js";
-import { DEFAULT_CONTENT_TYPE, getDefaultLanguage, setDefaultLanguage, getApiUrl } from "@/assets/js/appinfo.js";
-import { startApplication, serializeParameters } from "@/assets/js/apputil.js";
+import { getLabelModel } from "@/assets/js/label.util.js";
+import { DEFAULT_CONTENT_TYPE, getDefaultLanguage, setDefaultLanguage, getApiUrl } from "@/assets/js/app.info.js";
+import { startApplication, serializeParameters } from "@/assets/js/app.util.js";
 
 export default {
   components: {

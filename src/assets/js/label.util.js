@@ -1,4 +1,4 @@
-import { getDefaultLanguage, getDefaultLabels, getProgramLabels } from "./appinfo";
+import { getDefaultLanguage, getDefaultLabels, getProgramLabels } from "./app.info";
 
 export function getLabel(name, defaultLabel, lang = getDefaultLanguage()) {
     let result = undefined;

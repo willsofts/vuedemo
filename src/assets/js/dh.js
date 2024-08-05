@@ -1,5 +1,5 @@
 import $ from "jquery";
-import { getApiUrl, getBaseStorage } from "./appinfo";
+import { getApiUrl, getBaseStorage } from "./app.info";
 import CryptoJS from "crypto-js";
 import BigInteger from "bigi";
 

@@ -32,8 +32,8 @@
 <script>
 import { ref } from 'vue';
 import $ from "jquery";
-import { DEFAULT_CONTENT_TYPE, getApiUrl }  from '@/assets/js/appinfo.js';
-import { startWaiting, stopWaiting, submitFailure, serializeParameters }  from '@/assets/js/apputil.js'
+import { DEFAULT_CONTENT_TYPE, getApiUrl }  from '@/assets/js/app.info.js';
+import { startWaiting, stopWaiting, submitFailure, serializeParameters }  from '@/assets/js/app.util.js'
 import { Paging } from "@/assets/js/Paging.js";
 import InputDate from '@/controls/InputDate.vue';
 import InputMask from '@/controls/InputMask.vue';

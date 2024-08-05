@@ -15,7 +15,7 @@ import "./assets/css/user_style.css";
 import program_message from './assets/json/program_message.json';
 import default_labels from './assets/json/default_label.json';
 import program_labels from './assets/json/program_label.json';
-import { appInit } from "./assets/js/appinfo.js";
+import { appInit } from "./assets/js/app.info.js";
 appInit({program_message,default_labels,program_labels});
 import { createApp, version } from 'vue';
 import AppDemo002 from './AppDemo002.vue';

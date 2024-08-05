@@ -8,8 +8,8 @@
     </div>
 </template>
 <script>
-import { getControlClasses, openCalendar, clearCalendar }  from '@/assets/js/ctrlutil.js'
-import { randomNumber }  from '@/assets/js/randomutil.js'
+import { getControlClasses, openCalendar, clearCalendar }  from '@/assets/js/ctrl.util.js'
+import { randomNumber }  from '@/assets/js/random.util.js'
 
 export default {
   inheritAttrs: false, //disable all attributes from parent
