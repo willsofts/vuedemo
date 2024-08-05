@@ -73,8 +73,7 @@ export function inputNumberOnly(myfield,e,decimal,isPlus) {
 } 
 export function checkInputNumberOnly(myfield,e,decimal,isPlus) { 
 	let iskeyup = myfield.getAttribute('keyup'); 
-	if ( iskeyup==null) ;  
-	else if ( iskeyup==false){  return false; }  
+	if ( iskeyup==false){  return false; }  
 	myfield.setAttribute('keyup',false);  
 	return inputNumberOnly(myfield,e,decimal,isPlus);  
 } 

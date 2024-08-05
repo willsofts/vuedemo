@@ -365,6 +365,12 @@ a:hover { text-decoration: none; }
 .ui-state-active a, .ui-state-active a:link, .ui-state-active a:visited { color: #212121; text-decoration: none; }
 .ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight { border: 1px solid #fcefa1; background: #fbf9ee; }
 
+.input-group-lookup { border-radius: 0; }
+.input-group-clear { border-radius: 0 .25rem .25rem 0; }
+.imoney { text-align: right; }
+.iint { text-align: right; }
+.item-selected { text-decoration: underline; }
+
 .fa-hidden { display: none; }
 .btn-cover-layer { margin-right: 10px; }
 #fswaitlayer { display:none; position:absolute; left:1px; top:1px; z-Index:9999; font-size: 50px; color: #1E90FF; }
@@ -374,5 +380,3 @@ a:hover { text-decoration: none; }
 .img-lang { width: 30px; height: 15px; }
 .img-lang-EN { content: url(../img/lang/EN.png); }
 .img-lang-TH { content: url(../img/lang/TH.png); }
-.input-group-lookup { border-radius: 0; }
-.input-group-clear { border-radius: 0 .25rem .25rem 0; }
