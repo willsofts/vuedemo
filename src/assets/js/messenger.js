@@ -1,8 +1,16 @@
-import { getApiUrl, getBaseUrl, getCdnUrl, getImgUrl, getDefaultLanguage, getApiToken, getBaseStorage, setApiUrl, setBaseUrl, setCdnUrl, setImgUrl, setDefaultLanguage, setApiToken, getDefaultRawParameters  } from "./app.info.js";
+import { getApiUrl, getBaseUrl, getCdnUrl, getImgUrl, getDefaultLanguage, getApiToken, getBaseStorage, setApiUrl, setBaseUrl, setCdnUrl, setImgUrl, setDefaultLanguage, setApiToken, getDefaultRawParameters, setBaseStorage, isSecureStorage, setSecureStorage  } from "./app.info.js";
 import { DH } from "./dh.js";
+import SecureLS from 'secure-ls';
 
 var messagingCallback;
 var currentWindow;
+var secureEngine;
+export function getSecureEngine() {
+    if(!secureEngine) {
+        secureEngine = isSecureStorage() ? new SecureLS({storage: "local"==getBaseStorage() ? localStorage : sessionStorage}) : null;
+    }
+    return secureEngine;
+}
 export function setMessagingCallback(callback) {
     messagingCallback = callback;
 }
@@ -11,12 +19,19 @@ export function setCurrentWindow(curwin) {
 }
 export function getCurrentWindow() { return currentWindow; }
 export function getStorage(key) {
+    let secureLs = getSecureEngine();
+    if(secureLs) return secureLs.get(key);    
 	if("local"==getBaseStorage()) {
 		return localStorage.getItem(key);
 	}
     return sessionStorage.getItem(key);
 }
 export function setStorage(key,value) {
+    let secureLs = getSecureEngine();
+    if(secureLs) {
+        secureLs.set(key,value);
+        return;
+    }
 	if("local"==getBaseStorage()) {
 		localStorage.setItem(key,value);
 		return;
@@ -24,6 +39,11 @@ export function setStorage(key,value) {
 	sessionStorage.setItem(key,value);
 }
 export function removeStorage(key) {
+    let secureLs = getSecureEngine();
+    if(secureLs) {
+        secureLs.remove(key);
+        return;
+    }
 	if("local"==getBaseStorage()) {
 		localStorage.removeItem(key);
 		return;
@@ -56,7 +76,7 @@ export function sendMessageInterface(win) {
     let moderator = win?"opener":"parent";
 	let info = getAccessorInfo();
     let options = getStorage("accessoptions");
-	let msg = {type: "storage", moderator: moderator, API_URL: getApiUrl(), BASE_URL: getBaseUrl(), CDN_URL: getCdnUrl(), IMG_URL: getImgUrl(), DEFAULT_LANGUAGE: getDefaultLanguage(), API_TOKEN: getApiToken(), accessorinfo: info, accessoptions: options};
+	let msg = {type: "storage", moderator: moderator, API_URL: getApiUrl(), BASE_URL: getBaseUrl(), CDN_URL: getCdnUrl(), IMG_URL: getImgUrl(), DEFAULT_LANGUAGE: getDefaultLanguage(), API_TOKEN: getApiToken(), BASE_STORAGE: getBaseStorage(), SECURE_STORAGE: isSecureStorage(), accessorinfo: info, accessoptions: options};
 	return sendMessageToFrame(msg,win);
 }
 export function sendMessageToFrame(data,win) {
@@ -107,12 +127,14 @@ export function handleRequestMessage(data) {
         if(data.IMG_URL !== undefined) setImgUrl(data.IMG_URL);
         if(data.DEFAULT_LANGUAGE !== undefined) setDefaultLanguage(data.DEFAULT_LANGUAGE);
         if(data.API_TOKEN !== undefined) setApiToken(data.API_TOKEN);
+        if(data.BASE_STORAGE !== undefined) setBaseStorage(data.BASE_STORAGE);
+        if(data.SECURE_STORAGE !== undefined) setSecureStorage(data.SECURE_STORAGE);
         if(data.accessoptions !== undefined) setStorage("accessoptions",data.accessoptions);
         if(data.accessorinfo) {
             saveAccessorInfo(data.accessorinfo);
         }
         console.info("handleRequestMessage: accessor info",data.accessorinfo);
-        console.info("handleRequestMessage: DEFAULT_LANGUAGE="+getDefaultLanguage(),", BASE_STORAGE="+getBaseUrl(),", DEFAULT_RAW_PARAMETERS="+getDefaultRawParameters());
+        console.info("handleRequestMessage: DEFAULT_LANGUAGE="+getDefaultLanguage(),", BASE_STORAGE="+getBaseStorage(),", DEFAULT_RAW_PARAMETERS="+getDefaultRawParameters(),", SECURE_STORAGE="+isSecureStorage());
         console.info("handleRequestMessage: API_URL="+getApiUrl(),", BASE_URL="+getBaseUrl(),", CDN_URL="+getCdnUrl(),", IMG_URL="+getImgUrl());
         console.info("handleRequestMessage: API_TOKEN="+getApiToken());        
     }
@@ -153,18 +175,37 @@ export function getDH() {
     }
     return null;
 }
-window.onmessage = function(e) {
-    console.log("window-messenger: onmessage:",e.data);
-    try {
-        let payload = e.data;
-        if(typeof payload === 'string') { payload = JSON.parse(e.data); }
-        //in case of parent window, try to send accessor info
-        /*
-        if(payload.type=="accessorinfo") {					
-            sendMessageInterface(getCurrentWindow());
-            return;
-        }*/
-        //in case of child window, try to handle request message
-        handleRequestMessage(payload);
-    } catch(ex) { console.error(ex); }
+export function bindingChildMessaging() {
+    window.onmessage = function(e) {
+        console.log("window-messenger: onmessage:",e.data);
+        try {
+            let payload = e.data;
+            if(typeof payload === 'string') { payload = JSON.parse(e.data); }
+            //in case of parent window, try to send accessor info
+            /*
+            if(payload.type=="accessorinfo") {					
+                sendMessageInterface(getCurrentWindow());
+                return;
+            }*/
+            //in case of child window, try to handle request message
+            handleRequestMessage(payload);
+        } catch(ex) { console.error(ex); }
+    }
+}
+export function bindingParentMessaging() {
+    window.onmessage = function(e) {
+        console.log("window-main: onmessage:",e.data);
+        try {
+            let payload = e.data;
+            if(typeof payload === 'string') { payload = JSON.parse(e.data); }
+            //in case of parent window, try to send accessor info
+            
+            if(payload.type=="accessorinfo") {					
+                sendMessageInterface(getCurrentWindow());
+                return;
+            }
+            //in case of child window, try to handle request message
+            //handleRequestMessage(payload);
+        } catch(ex) { console.error(ex); }
+    }
 }

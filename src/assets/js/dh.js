@@ -1,5 +1,6 @@
 import $ from "jquery";
-import { getApiUrl, getBaseStorage } from "./app.info";
+import { getApiUrl } from "./app.info";
+import { getAccessorInfo } from "./messenger";
 import CryptoJS from "crypto-js";
 import BigInteger from "bigi";
 
@@ -89,17 +90,7 @@ DH.prototype.requestGenerator = function(callback,aurl) {
 };
 
 DH.prototype.getAccessorInfo = function() {
-	console.log("dh.js: BASE_STORAGE",getBaseStorage());
-	let info = undefined;
-	if("local"==getBaseStorage()) {
-		info = localStorage.getItem("accessorinfo");
-	} else {
-		info = sessionStorage.getItem("accessorinfo");
-	}
-    if(info && info!="") {
-        return JSON.parse(info);
-    }    
-    return null;
+	return getAccessorInfo();
 };
 
 DH.prototype.getAccessorToken = function() {
