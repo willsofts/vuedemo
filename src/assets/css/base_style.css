@@ -361,7 +361,7 @@ table.partition-table { background-color: #028575; }
 a:hover { text-decoration: none; }
 
 /* this is custom for jquery theme */
-.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active { border: 1px solid #aaaaaa; font-weight: normal; color: #212121; }
+.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active { border: 1px solid #aaaaaa; font-weight: normal; color: #212121; background-color: wheat; }
 .ui-state-active a, .ui-state-active a:link, .ui-state-active a:visited { color: #212121; text-decoration: none; }
 .ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight { border: 1px solid #fcefa1; background: #fbf9ee; }
 
