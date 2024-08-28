@@ -20,7 +20,6 @@
     "jquery-ui-dist": "^1.13.3",
     "secure-ls": "^2.0.0",
     "vue": "^3.4.30",
-    "vue-cryptojs": "^2.4.6",
     "vue3-select2-component": "^0.1.7"
   },
   "devDependencies": {
