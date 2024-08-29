@@ -3,6 +3,7 @@ node_modules
 /dist
 /declaration
 /coverage
+/demo002
 
 # local env files
 .env.local
