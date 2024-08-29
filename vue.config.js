@@ -13,6 +13,7 @@ module.exports = defineConfig({
   publicPath: process.env.NODE_ENV === 'production' /* this is BASE_URL in index.html */
     ? './' /*+ process.env.CI_PROJECT_NAME + '/'*/
     : './',
+  integrity: true,
   configureWebpack: {
     devtool: "source-map",
     optimization: {
