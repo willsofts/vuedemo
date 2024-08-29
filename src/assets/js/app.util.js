@@ -113,9 +113,12 @@ export function startWaiting() {
 		let fslayer = $("#fswaitlayer");
 		let lh = fslayer.height();
 		let fstop = mouseY;
-		if(lh > (sh-fstop)) fstop = mouseY-lh;
+		if(lh !== undefined && sh !== undefined) {
+			if(lh > (sh-fstop)) fstop = mouseY-lh;
+		}
+		let dw = dc.innerWidth();
 		fslayer.css("top",fstop);
-		fslayer.css("left",mouseX>0?mouseX:dc.innerWidth()-50);
+		if(dw !== undefined) fslayer.css("left",mouseX>0?mouseX:dw-50);
 		fslayer.show();
 	} catch(ex) { console.error(ex); }
 }
@@ -404,4 +407,16 @@ export function decryptCipherData(headers, data) {
 		}
 	}
 	return data;
+}
+export function createLinkStyle(css_url) {
+	if(css_url && css_url.trim().length > 0) {
+		console.log("try to create link style:",css_url);
+		try {
+			let style = document.createElement('link');
+			style.type = "text/css";
+			style.rel = "stylesheet";
+			style.href = css_url;
+			document.head.appendChild(style);  
+		} catch(ex) { console.error(ex); }
+	}
 }
