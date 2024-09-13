@@ -16,7 +16,7 @@
 </template>
 <script>
 import { ref } from 'vue';
-import { Paging } from "@/assets/js/Paging.js";
+import { Paging, DEFAULT_PAGE_SETTINGS } from "@/assets/js/Paging.js";
 
 export default {
   props: {
@@ -30,6 +30,9 @@ export default {
     return { paging, pager };
   },
   methods: {
+    clear() {
+      this.reset(DEFAULT_PAGE_SETTINGS);
+    },
     reset(newSettings) {
       if(newSettings) {
         this.paging.reset(newSettings);

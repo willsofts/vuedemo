@@ -59,7 +59,7 @@
 </template>
 <script>
 import { ref } from 'vue';
-import { Paging } from "@/assets/js/Paging.js";
+import { Paging, DEFAULT_PAGE_SETTINGS } from "@/assets/js/Paging.js";
 import { ensureTableSetting, formatDataTable } from "@/assets/js/ctrl.util.js";
 
 /*
@@ -96,7 +96,6 @@ export default {
     const sorting = ref({});
     const setting = ensureTableSetting(props.settings);
     const headers = ref(setting); 
-    console.info("setup: table settings",setting);
     return { datas, page, sorting, headers };
   },
   computed: {
@@ -120,6 +119,9 @@ export default {
   },
   emits: ["data-select","data-sort"],
   methods: {
+    clear() {
+      this.reset({ offsets: DEFAULT_PAGE_SETTINGS });
+    },
     reset(newData) {
       if(newData) {
         this.datas = {...newData};

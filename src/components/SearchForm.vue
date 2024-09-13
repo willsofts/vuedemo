@@ -20,6 +20,7 @@
         <div class="col-height col-md">
             <br/>
             <button @click="searchClick" class="btn btn-dark btn-sm btn-ctrl"><i class="fa fa-search fa-btn-icon" aria-hidden="true"></i>{{ labels.search_button }}</button>
+            <button @click="resetClick" class="btn btn-dark btn-sm btn-ctrl"><i class="fa fa-refresh fa-btn-icon" aria-hidden="true"></i>{{ labels.reset_button }}</button>
             <button @click="insertClick" class="btn btn-dark btn-sm btn-ctrl pull-right"><i class="fa fa-plus fa-btn-icon" aria-hidden="true"></i>{{ labels.insert_button }}</button>
         </div>
     </div>
@@ -92,6 +93,13 @@ export default {
     getPagingOptions(settings) {
       if(!settings) settings = this.pagingSettings;
       return {page: settings.page, limit: settings.limit, rowsPerPage: settings.rowsPerPage, orderBy: settings.orderBy?settings.orderBy:"", orderDir: settings.orderDir?settings.orderDir:"" };
+    },
+    resetClick() {
+      this.localData = {...defaultData};
+      this.resetFilters();
+      this.$refs.dataTable.clear();
+      this.$refs.dataPaging.clear();
+      this.pagingSettings.rows = 0;
     },
     insertClick() {
       this.$emit('data-insert',this.filters);

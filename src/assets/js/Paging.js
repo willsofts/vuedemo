@@ -1,8 +1,13 @@
 
+export const DEFAULT_PAGE_SETTINGS = { page: 1, rowsPerPage: 10, totalRows: 0, totalPages: 1, limit: 10, offset: 10, rows: 0 };
+
 export class Paging {
     constructor(setting = { }) {
-        let defaultOptions = { page: 1, rowsPerPage: 10, totalRows: 0, totalPages: 1, limit: 10, offset: 10, rows: 0 };
-        this.setting = Object.assign(defaultOptions,setting);
+        this.setting = Object.assign({},DEFAULT_PAGE_SETTINGS,setting);
+    }
+
+    clear() {
+        this.reset(DEFAULT_PAGE_SETTINGS);
     }
 
     reset(setting) {
