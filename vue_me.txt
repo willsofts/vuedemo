@@ -8,14 +8,30 @@ Setting
     - App.vue -> AppXXXX999.vue ex. AppDemo002.vue
     - main.js -> XXXX999.js ex. demo002.js (depend on 1 pages.index.entry)
         (change import App.vue -> AppXXXX999.vue too)
+    - AppXXXX999.vue try change pid in PageHeader ex. pid="demo002"
+3. edit .gitignore add output dir ex.
+    /demo002
+4. change package.json name = demo002
+
 
 Examine
-1. start vue serve project
-    goto https://github.com/willsofts/vueserve
-2. api try out
+1. start vueserve project goto 
+    https://github.com/willsofts/vueserve
+2. api try out, this is supported api that you have created ex. 
     curl -X POST http://localhost:8080/api/demo002/retrieve -d account=1-0-12345-6
 
-In development mode you can setting environment before start up project
+In development mode you can setting environment before start up assure project
 set VALIDATE_TOKEN=false
 or
 export VALIDATE_TOKEN=false
+
+Testing
+1. Normally copy output folder after build success ex. demo002 into vueserve project under public path and then you can launch it directly ex.
+    http://localhost:8080/demo002/demo002.html
+
+2. This can run serve or using file protocol testing but it must build with environment variables,
+try to set below before startup build command.
+
+set VUE_APP_API_URL=http://127.0.0.1:8080
+set VUE_APP_BASE_URL=http://127.0.0.1:8080
+
