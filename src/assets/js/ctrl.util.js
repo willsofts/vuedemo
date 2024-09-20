@@ -43,6 +43,7 @@ export function openCalendar(src) {
 			}
 		});
 		dpkr.datepicker("show");
+		$(document).off('focusin');
 		return;
 	}catch (ex)	{ console.error(ex); }
 }
@@ -135,7 +136,7 @@ function putComma(data) {
 	} 
 	return data; 
 } 
-export function clearComma(data){ 
+export function clearComma(data) { 
 	while (data.indexOf(',')!=-1) { 
 		data = data.replace(',',''); 
 	} 
@@ -170,9 +171,10 @@ export function parseNumber(avalue) {
 	return Number(removeComma(avalue)); 
 } 		  
 function removeComma(avalue) { 
-	let result = avalue ; 
+	let result = avalue+""; 
 	while ( result.indexOf(",") > -1 ) { 
-		result = removeDelimiter(result,",");	} 
+		result = removeDelimiter(result,",");	
+	} 
 	return result; 
 } 		 				 
 function removeDelimiter(avalue,delimiter) { 
