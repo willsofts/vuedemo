@@ -168,9 +168,11 @@ export function setCaretPosition(ctrl, iCaretPos) {
 	}
 }
 export function parseNumber(avalue) { 
+	if(!avalue) return 0;
 	return Number(removeComma(avalue)); 
 } 		  
-function removeComma(avalue) { 
+function removeComma(avalue) {
+	if(!avalue) return avalue; 
 	let result = avalue+""; 
 	while ( result.indexOf(",") > -1 ) { 
 		result = removeDelimiter(result,",");	
