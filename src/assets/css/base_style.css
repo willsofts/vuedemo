@@ -371,6 +371,7 @@ a:hover { text-decoration: none; }
 .iint { text-align: right; }
 .item-selected { text-decoration: underline; }
 
+.fa-action { padding-left: 5px; padding-right: 5px; color: black; }
 .fa-hidden { display: none; }
 .btn-cover-layer { margin-right: 10px; }
 #fswaitlayer { display:none; position:absolute; left:1px; top:1px; z-Index:9999; font-size: 50px; color: #1E90FF; }
@@ -380,3 +381,8 @@ a:hover { text-decoration: none; }
 .img-lang { width: 30px; height: 15px; }
 .img-lang-EN { content: url(../img/lang/EN.png); }
 .img-lang-TH { content: url(../img/lang/TH.png); }
+.img-lang-VN { content: url(../img/lang/VN.png); }
+.img-lang-CN { content: url(../img/lang/CN.png); }
+.img-lang-KM { content: url(../img/lang/KM.png); }
+.img-lang-LA { content: url(../img/lang/LA.png); }
+.img-lang-JP { content: url(../img/lang/JP.png); }

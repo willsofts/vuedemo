@@ -2,6 +2,13 @@
 	{
 		"language": "TH",
 		"label": [
+			{"name": "EN_lang", "value": "อังกฤษ"},
+			{"name": "TH_lang", "value": "ไทย"},
+			{"name": "VN_lang", "value": "เวียดนาม"},
+			{"name": "CN_lang", "value": "จีน"},
+			{"name": "LA_lang", "value": "ลาว"},
+			{"name": "KM_lang", "value": "กัมพูชา"},
+			{"name": "JP_lang", "value": "ญี่ปุ่น"},
 			{"name": "english_lang", "value": "อังกฤษ"},
 			{"name": "thai_lang", "value": "ไทย"},
 			{"name": "title_new", "value": "สร้างใหม่"},
@@ -45,6 +52,13 @@
 	{
 		"language": "EN",
 		"label": [
+			{"name": "EN_lang", "value": "English"},
+			{"name": "TH_lang", "value": "Thai"},
+			{"name": "VN_lang", "value": "Vietnam"},
+			{"name": "CN_lang", "value": "China"},
+			{"name": "LA_lang", "value": "Laos"},
+			{"name": "KM_lang", "value": "Cambodia"},
+			{"name": "JP_lang", "value": "Japan"},
 			{"name": "english_lang", "value": "English"},
 			{"name": "thai_lang", "value": "Thai"},
 			{"name": "title_new", "value": "Add New"},

@@ -39,10 +39,10 @@ export default {
     showLanguage: {
       type: [String,Boolean],
       default: false,
-    },
+    },    
     multiLanguages: {
       type: Array,
-      default() { return [{lang:"EN", label: "english_lang"}, {lang:"TH", label: "thai_lang"}]; },
+      default() { return [{lang:"EN", label: "EN_lang"}, {lang:"TH", label: "TH_lang"} },
     },
     language: {
       type: String,
