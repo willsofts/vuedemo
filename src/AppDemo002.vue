@@ -18,7 +18,7 @@ import EntryForm from '@/components/EntryForm.vue';
 import { getLabelModel } from "@/assets/js/label.util.js";
 import { DEFAULT_CONTENT_TYPE, getDefaultLanguage, setDefaultLanguage, getApiUrl, getMultiLanguagesModel } from "@/assets/js/app.info.js";
 import { startApplication, serializeParameters } from "@/assets/js/app.util.js";
-import { getPermitModel } from './assets/js/permit.util';
+import { getPermitModel, Permission } from './assets/js/permit.util';
 
 export default {
   components: {
@@ -34,7 +34,8 @@ export default {
     let labels = ref(getLabelModel());
     let alreadyLoading = ref(false);
     const multiLanguages = ref(getMultiLanguagesModel());
-    return { multiLanguages, labels, dataCategory, dataChunk, alreadyLoading };
+    const permits = ref(new Permission());
+    return { multiLanguages, labels, dataCategory, dataChunk, alreadyLoading, permits };
   },
   mounted() {
     console.log("App: mounted ...");
@@ -50,8 +51,8 @@ export default {
       //try to find out parameters from url
       const searchParams = new URLSearchParams(window.location.href);
       console.log("param: authtoken=",searchParams.get("authtoken"),", language=",searchParams.get("language"));
-      let permit = await getPermitModel("demo002");
-      console.log("permit:",permit,"can insert=",permit.canDo('insert'));
+      this.permits = await getPermitModel("demo002");
+      console.log("permits:",this.permits,"can insert=",this.permits.canDo('insert'));
     });
   },
   methods: {
