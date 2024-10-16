@@ -421,3 +421,12 @@ export function createLinkStyle(css_url) {
 		} catch(ex) { console.error(ex); }
 	}
 }
+export function disableControls() {
+	$(arguments).each(function(index,element) { 
+		let $src = $(element);
+		$src.attr("disabled","true");
+		setTimeout(function() { 
+			$src.removeAttr("disabled"); 
+		},1000);		
+	});
+}
