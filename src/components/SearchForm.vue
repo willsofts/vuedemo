@@ -64,6 +64,11 @@ const tableSettings = {
     actions: [
         {type: "button", action: "edit"},
         {type: "button", action: "delete"},
+        { 
+          render: function(record) { 
+            return record.gender=="M" ? { type: "a", action: "view", css: "btn-view fa-data-view", icon: "fa fa-eye" } : {};
+          }
+        }
     ],
 };
 

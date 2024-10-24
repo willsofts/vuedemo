@@ -26,21 +26,37 @@
           </template>
           <template v-for="(column,colIndex) in headers.columns" :key="colIndex">
             <td :class="column.css">
-                <a href="javascript:void(0)" class="alink-data fa-data-edit" @click="dataSelect(item)"><span v-if="column.unescape" v-html="formatData(item[column.name],column)"></span><span v-else>{{ formatData(item[column.name],column) }}</span></a>
+                <a href="javascript:void(0)" class="alink-data fa-data-edit" @click="dataSelect(item)"><span v-if="column.unescape" v-html="formatData(item[column.name],column,item)"></span><span v-else>{{ formatData(item[column.name],column,item) }}</span></a>
             </td>
           </template>
           <template v-if="hasActions">
             <td class="text-center">
               <template v-for="(action,actionIndex) in headers.actions" :key="actionIndex">
-                <template v-if="action.type=='button'">
-                  <button :class="action.css" @click="dataSelect(item,action.action)">
-                    <template v-if="action.icon"><em :class="action.icon"></em></template>
-                  </button>
+                <template v-if="action.render">
+                  <template v-if="(actioner = action.render(item))">
+                    <template v-if="actioner.type=='button'">
+                      <button :class="actioner.css" @click="dataSelect(item,actioner.action)">
+                        <template v-if="actioner.icon"><em :class="actioner.icon"></em></template>
+                      </button>
+                    </template>
+                    <template v-if="actioner.type=='a'">
+                      <A href="javascript:void(0)" class="alink-action" :class="actioner.css" @click="dataSelect(item,actioner.action)">
+                        <template v-if="actioner.icon"><em :class="actioner.icon"></em></template>
+                      </A>
+                    </template>
+                  </template>
                 </template>
-                <template v-if="action.type=='a'">
-                  <A href="javascript:void(0)" class="alink-action" :class="action.css" @click="dataSelect(item,action.action)">
-                    <template v-if="action.icon"><em :class="action.icon"></em></template>
-                  </A>
+                <template v-else>
+                  <template v-if="action.type=='button'">
+                    <button :class="action.css" @click="dataSelect(item,action.action)">
+                      <template v-if="action.icon"><em :class="action.icon"></em></template>
+                    </button>
+                  </template>
+                  <template v-if="action.type=='a'">
+                    <A href="javascript:void(0)" class="alink-action" :class="action.css" @click="dataSelect(item,action.action)">
+                      <template v-if="action.icon"><em :class="action.icon"></em></template>
+                    </A>
+                  </template>
                 </template>
               </template>
             </td>
@@ -143,15 +159,15 @@ export default {
       this.sorting[sorter] = direction;
       this.$emit('data-sort', sorter, direction);
     },
-    formatData(data,field) {
+    formatData(data,field,record) {
       if(this.$props.formater) {
-        let result = this.$props.formater.call(this,data,field);
+        let result = this.$props.formater.call(this,data,field,record);
         if(result) return result;
       }
-      return this.formatField(data,field);
+      return this.formatField(data,field,record);
     },
-    formatField(data,field) {
-      return formatDataTable(data,field);
+    formatField(data,field,record) {
+      return formatDataTable(data,field,record);
     },
   }
 };
