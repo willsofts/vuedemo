@@ -1,59 +1,59 @@
 import { bindingChildMessaging, bindingParentMessaging } from "./messenger";
-
-var DEFAULT_LANGUAGE = process.env.VUE_APP_DEFAULT_LANGUAGE;
-var API_URL = process.env.VUE_APP_API_URL;
-var BASE_URL = process.env.VUE_APP_BASE_URL;
-var CDN_URL = process.env.VUE_APP_CDN_URL;
-var IMG_URL = process.env.VUE_APP_IMG_URL;
-var CHAT_URL = process.env.VUE_APP_CHAT_URL;
-var BASE_STORAGE = process.env.VUE_APP_BASE_STORAGE;
-var API_TOKEN = process.env.VUE_APP_API_TOKEN;
-var DEFAULT_RAW_PARAMETERS = process.env.VUE_APP_DEFAULT_RAW_PARAMETERS == "true";
-var SECURE_STORAGE = process.env.VUE_APP_SECURE_STORAGE == "true";
-var BASE_CSS = process.env.VUE_APP_BASE_CSS;
+const appInfo = {
+	DEFAULT_LANGUAGE : process.env.VUE_APP_DEFAULT_LANGUAGE,
+	API_URL : process.env.VUE_APP_API_URL,
+	BASE_URL : process.env.VUE_APP_BASE_URL,
+	CDN_URL : process.env.VUE_APP_CDN_URL,
+	IMG_URL : process.env.VUE_APP_IMG_URL,
+	CHAT_URL : process.env.VUE_APP_CHAT_URL,
+	BASE_STORAGE : process.env.VUE_APP_BASE_STORAGE,
+	API_TOKEN : process.env.VUE_APP_API_TOKEN,
+	DEFAULT_RAW_PARAMETERS : process.env.VUE_APP_DEFAULT_RAW_PARAMETERS == "true",
+	SECURE_STORAGE : process.env.VUE_APP_SECURE_STORAGE == "true",
+	BASE_CSS : process.env.VUE_APP_BASE_CSS,
+	MULTI_LANGUAGES : ["EN","TH"],
+};
 var APP_MULTI_LANGUAGES = process.env.VUE_APP_MULTI_LANGUAGES;
-var MULTI_LANGUAGES = ["EN","TH"];
 if(APP_MULTI_LANGUAGES && APP_MULTI_LANGUAGES.trim().length>0) {
 	let multilangs = JSON.parse(APP_MULTI_LANGUAGES);
-	if(Array.isArray(multilangs)) MULTI_LANGUAGES = multilangs;
+	if(Array.isArray(multilangs)) appInfo.MULTI_LANGUAGES = multilangs;
 }
 export const DEFAULT_CONTENT_TYPE = "application/json; charset=UTF-8";
-console.info("DEFAULT_LANGUAGE="+DEFAULT_LANGUAGE,", BASE_STORAGE="+BASE_STORAGE,", DEFAULT_RAW_PARAMETERS="+DEFAULT_RAW_PARAMETERS,", SECURE_STORAGE="+SECURE_STORAGE);
-console.info("API_URL="+API_URL,", BASE_URL="+BASE_URL,", CDN_URL="+CDN_URL,", IMG_URL="+IMG_URL+", BASE_CSS="+BASE_CSS+", CHAT_URL="+CHAT_URL+", MULTI_LANGUAGES="+MULTI_LANGUAGES);
-console.info("API_TOKEN="+API_TOKEN);
+console.log("AppInfo",appInfo);
 var notifyCallback;
+export function getAppInfo() { return appInfo; }
 export function registerNotification(callback) { notifyCallback = callback; }
-export function getMultiLanguages() { return MULTI_LANGUAGES; }
+export function getMultiLanguages() { return appInfo.MULTI_LANGUAGES; }
 export function setMultiLanguages(values) { 
 	console.info("set MULTI_LANGUAGES",values); 
-	if(values) MULTI_LANGUAGES = values; 
-	if(notifyCallback) notifyCallback("multi-languages",MULTI_LANGUAGES);
+	if(values) appInfo.MULTI_LANGUAGES = values; 
+	if(notifyCallback) notifyCallback("multi-languages",appInfo.MULTI_LANGUAGES);
 }
-export function getDefaultLanguage() { return DEFAULT_LANGUAGE; }
+export function getDefaultLanguage() { return appInfo.DEFAULT_LANGUAGE; }
 export function setDefaultLanguage(language) {
 	console.log("set default_language="+language);
-	if(language && language.trim().length>0) DEFAULT_LANGUAGE = language;
+	if(language && language.trim().length>0) appInfo.DEFAULT_LANGUAGE = language;
 }
-export function getApiToken() { return API_TOKEN; }
-export function getApiUrl() { return API_URL; }
-export function getBaseUrl() { return BASE_URL; }
-export function getCdnUrl() { return CDN_URL; }
-export function getImgUrl() { return IMG_URL; }
-export function getChatUrl() { return CHAT_URL; }
-export function getBaseStorage() { return BASE_STORAGE; }
-export function getDefaultRawParameters() { return DEFAULT_RAW_PARAMETERS; }
-export function setApiToken(value) { API_TOKEN = value; }
-export function setApiUrl(value) { API_URL = value; }
-export function setBaseUrl(value) { BASE_URL = value; }
-export function setCdnUrl(value) { CDN_URL = value; }
-export function setImgUrl(value) { IMG_URL = value; }
-export function setChatUrl(value) { CHAT_URL = value; }
-export function setBaseStorage(value) { BASE_STORAGE = value; }
-export function setDefaultRawParameters(value) { DEFAULT_RAW_PARAMETERS = value; }
-export function setSecureStorage(value) { SECURE_STORAGE = value; }
-export function isSecureStorage() { return SECURE_STORAGE; }
-export function getBaseCss() { return BASE_CSS; }
-export function setBaseCss(value) { BASE_CSS = value; }
+export function getApiToken() { return appInfo.API_TOKEN; }
+export function getApiUrl() { return appInfo.API_URL; }
+export function getBaseUrl() { return appInfo.BASE_URL; }
+export function getCdnUrl() { return appInfo.CDN_URL; }
+export function getImgUrl() { return appInfo.IMG_URL; }
+export function getChatUrl() { return appInfo.CHAT_URL; }
+export function getBaseStorage() { return appInfo.BASE_STORAGE; }
+export function getDefaultRawParameters() { return appInfo.DEFAULT_RAW_PARAMETERS; }
+export function setApiToken(value) { appInfo.API_TOKEN = value; }
+export function setApiUrl(value) { appInfo.API_URL = value; }
+export function setBaseUrl(value) { appInfo.BASE_URL = value; }
+export function setCdnUrl(value) { appInfo.CDN_URL = value; }
+export function setImgUrl(value) { appInfo.IMG_URL = value; }
+export function setChatUrl(value) { appInfo.CHAT_URL = value; }
+export function setBaseStorage(value) { appInfo.BASE_STORAGE = value; }
+export function setDefaultRawParameters(value) { appInfo.DEFAULT_RAW_PARAMETERS = value; }
+export function setSecureStorage(value) { appInfo.SECURE_STORAGE = value; }
+export function isSecureStorage() { return appInfo.SECURE_STORAGE; }
+export function getBaseCss() { return appInfo.BASE_CSS; }
+export function setBaseCss(value) { appInfo.BASE_CSS = value; }
 var default_labels = [];
 var program_labels = [];
 var program_message = [];

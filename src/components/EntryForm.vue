@@ -41,7 +41,10 @@
           <div class="col-height col-md-4">
             <label for="effectdate">{{ labels.effectdate_label }}</label>
             <div class="input-group" :class="{'has-error': v$.effectdate.$error}">
+              <div class="date-control">
               <InputDate ref="effectdate" v-model="localData.effectdate" id="effectdate" name="effectdate" /> 
+              <label class="required">*</label>
+              </div>
             </div>
             <span v-if="v$.effectdate.$error" class="has-error">{{ v$.effectdate.$errors[0].$message }}</span>
           </div>
@@ -49,6 +52,7 @@
             <label for="edittime">{{labels.effecttime_label}}</label>
             <div class="input-group" :class="{'has-error': v$.effecttime.$error}">
               <InputTime ref="effecttime" v-model="localData.effecttime" id="effecttime" name="effecttime" /> 
+              <label class="required">*</label>
             </div>
             <span v-if="v$.effecttime.$error" class="has-error">{{ v$.effecttime.$errors[0].$message }}</span>
           </div>

@@ -119,6 +119,8 @@ export default {
         this.$refs.entryForm.retrieveRecord({account: item.account});
       } else if("delete"==action) {
         this.$refs.entryForm.startDeleteRecord({account: item.account});
+      } else if("view"==action) {
+        alert("Action: View");
       }
     },
     dataInsert(filters) {

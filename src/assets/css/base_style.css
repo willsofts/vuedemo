@@ -386,3 +386,4 @@ a:hover { text-decoration: none; }
 .img-lang-KM { content: url(../img/lang/KM.png); }
 .img-lang-LA { content: url(../img/lang/LA.png); }
 .img-lang-JP { content: url(../img/lang/JP.png); }
+div.date-control { padding-right: 0px; display: flex; }

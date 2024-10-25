@@ -120,8 +120,8 @@ export function sendMessageToOpener(data) {
     return false;
 }
 export function handleRequestMessage(data) {
-    console.log("handleRequestMessage: data",data);
     if(data.type=="storage") {
+        console.log("handleRequestMessage: data",data);
         if(data.API_URL !== undefined) setApiUrl(data.API_URL);
         if(data.BASE_URL !== undefined) setBaseUrl(data.BASE_URL);
         if(data.CDN_URL !== undefined) setCdnUrl(data.CDN_URL);
@@ -189,7 +189,7 @@ export function getDH() {
 }
 export function bindingChildMessaging() {
     window.onmessage = function(e) {
-        console.log("window-messenger: onmessage:",e.data);
+        //console.log("window-messenger: onmessage:",e.data);
         try {
             let payload = e.data;
             if(typeof payload === 'string') { payload = JSON.parse(e.data); }
@@ -206,7 +206,7 @@ export function bindingChildMessaging() {
 }
 export function bindingParentMessaging() {
     window.onmessage = function(e) {
-        console.log("window-main: onmessage:",e.data);
+        //console.log("window-main: onmessage:",e.data);
         try {
             let payload = e.data;
             if(typeof payload === 'string') { payload = JSON.parse(e.data); }
