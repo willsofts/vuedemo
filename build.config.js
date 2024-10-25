@@ -1,0 +1,20 @@
+const fs = require('fs');
+const path = require('path');
+
+const now = new Date();
+let dd = now.getDate(); 
+let mo = now.getMonth()+1; 
+let yy = now.getFullYear(); 
+let hh = now.getHours(); 
+let mm = now.getMinutes(); 
+let ss = now.getSeconds(); 
+let result = ""+yy;
+result += ((mo < 10) ? "0" : "") + mo; 
+result += ((dd < 10) ? "0" : "") + dd; 
+result += "-";
+result += ((hh < 10) ? "0":"") + hh; 
+result += ((mm < 10) ? "0" : "") + mm; 
+result += ((ss < 10) ? "0" : "") + ss; 
+const buildDate = `${result}`;
+console.log("build: ",buildDate);
+fs.writeFileSync(path.resolve(__dirname, '.env.local'), `VUE_APP_BUILD_DATETIME=${buildDate}\n`);
