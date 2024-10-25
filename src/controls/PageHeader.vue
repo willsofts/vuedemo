@@ -11,7 +11,7 @@
               </template>
               <hr class="menu-separator" v-show="displayVersion && displayLanguage"/>
               <li v-if="displayVersion"><A href="javascript:void(0)" @click="showVersion" class="pagemenu-linker"><em class="fa fa-info-circle fa-class" aria-hidden="true"></em>&nbsp;<span>{{ labels.version_label }} {{ version }}</span></A></li>
-              <li v-if="displayBuild" class="build-version"><A href="javascript:void(0)" class="pagemenu-linker"><em class="fa fa-at fa-class" aria-hidden="true"></em>&nbsp;<span>{{ buildVersion }}</span></A></li>
+              <li v-if="displayBuild" class="build-version"><A href="javascript:void(0)" class="pagemenu-linker"><em class="fa fa-at fa-class" aria-hidden="true"></em>&nbsp;<span>{{ build }}</span></A></li>
             </ul>
           </li>
         </ul>
@@ -25,7 +25,7 @@
 <script>
 import { ref } from "vue";
 import { Utilities } from '@/assets/js/Utilities';
-const buildVersion = process.env.VUE_APP_BUILD_DATETIME;
+
 export default {
   props: {
     pid: String,
@@ -50,6 +50,10 @@ export default {
       type: String,
       default: "EN",
     },
+    build: {
+      type: String,
+      default: "",
+    },
     showBuild: {
       type: [String,Boolean],
       default: false,
@@ -62,7 +66,7 @@ export default {
   emits: ["show-version","language-changed"],
   setup(props) {
     const currentLanguage = ref(props.language && props.language.trim().length > 0 ? props.language : "EN");
-    return { buildVersion, currentLanguage };
+    return { currentLanguage };
   },
   computed: {
     pageId() { return this.$props.pid.toUpperCase(); },
@@ -76,10 +80,9 @@ export default {
   },
   methods: {
     showVersion() {
-      console.log("show version: "+this.$props.pid);
-      console.log("build version: "+this.buildVersion);
-      if(this.isAlertBuild && !this.displayBuild) alert("Build: "+this.buildVersion);
-      this.$emit('show-version', this.$props.pid, this.buildVersion);
+      console.log("show version: "+this.$props.pid,"build version: "+this.$props.build);
+      if(this.isAlertBuild && !this.displayBuild) alert("Build: "+this.$props.build);
+      this.$emit('show-version', this.$props.pid, this.$props.build);
     },
     changeLanguage(lang) {
       this.currentLanguage = lang;

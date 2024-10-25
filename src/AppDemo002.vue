@@ -2,7 +2,7 @@
 <template>
   <div id="fswaitlayer" class="fa fa-spinner fa-spin"></div>
   <div class="pt-page pt-page-current pt-page-controller search-pager">
-    <PageHeader ref="pageHeader" :labels="labels" pid="demo002" version="1.0.0" showLanguage="true" @language-changed="changeLanguage" :multiLanguages="multiLanguages"/>
+    <PageHeader ref="pageHeader" :labels="labels" pid="demo002" version="1.0.0" showLanguage="true" @language-changed="changeLanguage" :multiLanguages="multiLanguages" :build="buildVersion"/>
     <SearchForm ref="searchForm" :labels="labels" :dataCategory="dataCategory" @data-select="dataSelected" @data-insert="dataInsert" />
   </div>
   <teleport to="#modaldialog">
@@ -20,6 +20,7 @@ import { DEFAULT_CONTENT_TYPE, getDefaultLanguage, setDefaultLanguage, getApiUrl
 import { startApplication, serializeParameters } from "@/assets/js/app.util.js";
 import { getPermitModel, Permission } from './assets/js/permit.util';
 
+const buildVersion = process.env.VUE_APP_BUILD_DATETIME;
 export default {
   components: {
     PageHeader, SearchForm, EntryForm
@@ -35,7 +36,7 @@ export default {
     let alreadyLoading = ref(false);
     const multiLanguages = ref(getMultiLanguagesModel());
     const permits = ref(new Permission());
-    return { multiLanguages, labels, dataCategory, dataChunk, alreadyLoading, permits };
+    return { buildVersion, multiLanguages, labels, dataCategory, dataChunk, alreadyLoading, permits };
   },
   mounted() {
     console.log("App: mounted ...");
