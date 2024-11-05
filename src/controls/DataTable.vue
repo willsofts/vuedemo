@@ -35,12 +35,12 @@
                 <template v-if="action.render">
                   <template v-if="(actioner = action.render(item))">
                     <template v-if="actioner.type=='button'">
-                      <button :class="actioner.css" @click="dataSelect(item,actioner.action)">
+                      <button :class="actioner.css" @click="dataSelect(item,action.render(item).action)">
                         <template v-if="actioner.icon"><em :class="actioner.icon"></em></template>
                       </button>
                     </template>
                     <template v-if="actioner.type=='a'">
-                      <A href="javascript:void(0)" class="alink-action" :class="actioner.css" @click="dataSelect(item,actioner.action)">
+                      <A href="javascript:void(0)" class="alink-action" :class="actioner.css" @click="dataSelect(item,action.render(item).action)">
                         <template v-if="actioner.icon"><em :class="actioner.icon"></em></template>
                       </A>
                     </template>
