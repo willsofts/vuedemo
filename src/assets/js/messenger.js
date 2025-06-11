@@ -1,4 +1,4 @@
-import { getApiUrl, getBaseUrl, getCdnUrl, getImgUrl, getDefaultLanguage, getApiToken, getBaseStorage, setApiUrl, setBaseUrl, setCdnUrl, setImgUrl, setDefaultLanguage, setApiToken, getDefaultRawParameters, setBaseStorage, isSecureStorage, setSecureStorage, getBaseCss, setBaseCss, getChatUrl, setChatUrl, getMultiLanguages, setMultiLanguages } from "./app.info.js";
+import { getApiUrl, getBaseUrl, getCdnUrl, getImgUrl, getDefaultLanguage, getApiToken, getBaseStorage, setApiUrl, setBaseUrl, setCdnUrl, setImgUrl, setDefaultLanguage, setApiToken, getDefaultRawParameters, setBaseStorage, isSecureStorage, setSecureStorage, getBaseCss, setBaseCss, getChatUrl, setChatUrl, getMultiLanguages, setMultiLanguages, getTokenKey, setTokenKey, getMetaInfo, setMetaInfo } from "./app.info.js";
 import { createLinkStyle } from "./app.util";
 import { DH } from "./dh.js";
 import SecureLS from 'secure-ls';
@@ -63,7 +63,7 @@ export function getAccessorToken() {
     if(json && json.authtoken) {
         return json.authtoken;
     }
-    let token = getApiToken();
+    let token = getTokenKey();
 	if(token && token!="") return token;
     return "";
 }
@@ -77,7 +77,7 @@ export function sendMessageInterface(win) {
     let moderator = win?"opener":"parent";
 	let info = getAccessorInfo();
     let options = getStorage("accessoptions");
-	let msg = {type: "storage", archetype: "willsofts", moderator: moderator, API_URL: getApiUrl(), BASE_URL: getBaseUrl(), CDN_URL: getCdnUrl(), IMG_URL: getImgUrl(), DEFAULT_LANGUAGE: getDefaultLanguage(), API_TOKEN: getApiToken(), BASE_STORAGE: getBaseStorage(), SECURE_STORAGE: isSecureStorage(), BASE_CSS: getBaseCss(), CHAT_URL: getChatUrl(), MULTI_LANGUAGES: getMultiLanguages(), accessorinfo: info, accessoptions: options};
+	let msg = {type: "storage", archetype: "willsofts", moderator: moderator, API_URL: getApiUrl(), BASE_URL: getBaseUrl(), CDN_URL: getCdnUrl(), IMG_URL: getImgUrl(), DEFAULT_LANGUAGE: getDefaultLanguage(), API_TOKEN: getApiToken(), BASE_STORAGE: getBaseStorage(), SECURE_STORAGE: isSecureStorage(), BASE_CSS: getBaseCss(), CHAT_URL: getChatUrl(), MULTI_LANGUAGES: getMultiLanguages(), TOKEN_KEY: getTokenKey(), META_INFO: getMetaInfo(), accessorinfo: info, accessoptions: options};
 	return sendMessageToFrame(msg,win);
 }
 export function sendMessageToFrame(data,win) {
@@ -122,6 +122,7 @@ export function sendMessageToOpener(data) {
 export function handleRequestMessage(data) {
     if(data.type=="storage") {
         console.log("handleRequestMessage: data",data);
+        if(data.TOKEN_KEY !== undefined) setTokenKey(data.TOKEN_KEY);
         if(data.API_URL !== undefined) setApiUrl(data.API_URL);
         if(data.BASE_URL !== undefined) setBaseUrl(data.BASE_URL);
         if(data.CDN_URL !== undefined) setCdnUrl(data.CDN_URL);
@@ -133,6 +134,7 @@ export function handleRequestMessage(data) {
         if(data.BASE_CSS !== undefined) setBaseCss(data.BASE_CSS);
         if(data.CHAT_URL !== undefined) setChatUrl(data.CHAT_URL);
         if(data.MULTI_LANGUAGES !== undefined) setMultiLanguages(data.MULTI_LANGUAGES);
+        if(data.META_INFO !== undefined) setMetaInfo(data.META_INFO);
         if(data.accessoptions !== undefined) setStorage("accessoptions",data.accessoptions);
         if(data.accessorinfo) {
             saveAccessorInfo(data.accessorinfo);
@@ -140,7 +142,7 @@ export function handleRequestMessage(data) {
         console.info("handleRequestMessage: accessor info",data.accessorinfo);
         console.info("handleRequestMessage: DEFAULT_LANGUAGE="+getDefaultLanguage(),", BASE_STORAGE="+getBaseStorage(),", DEFAULT_RAW_PARAMETERS="+getDefaultRawParameters(),", SECURE_STORAGE="+isSecureStorage());
         console.info("handleRequestMessage: API_URL="+getApiUrl(),", BASE_URL="+getBaseUrl(),", CDN_URL="+getCdnUrl(),", IMG_URL="+getImgUrl()+", BASE_CSS="+getBaseCss()+", CHAT_URL="+getChatUrl()+", MULTI_LANGUAGES="+getMultiLanguages());
-        console.info("handleRequestMessage: API_TOKEN="+getApiToken());        
+        console.info("handleRequestMessage: API_TOKEN="+getApiToken(),", META_INFO=",getMetaInfo()); 
         createLinkStyle(getBaseCss());       
     }
     if(messagingCallback && data.archetype=="willsofts") messagingCallback(data);
@@ -154,12 +156,14 @@ export function setupDiffie(json) {
         dh.generator = info.generator;
         dh.otherPublicKey = info.publickey;
         dh.compute();
-        dh.updatePublicKey((success) => {
-			if(success) {
-				info.handshake = "C"; //confirm
-				saveAccessorInfo(json.body);		
-			}
-		});
+        if(!(String(getMetaInfo().DISABLE_DIFFIE)=="true")) {
+            dh.updatePublicKey((success) => {
+                if(success) {
+                    info.handshake = "C"; //confirm
+                    saveAccessorInfo(json.body);		
+                }
+            });
+        }
         info.privatekey = dh.privateKey;
         info.publickey = dh.publicKey;
         info.sharedkey = dh.sharedKey;
