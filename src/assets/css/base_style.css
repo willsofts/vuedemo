@@ -387,3 +387,15 @@ a:hover { text-decoration: none; }
 .img-lang-LA { content: url(../img/lang/LA.png); }
 .img-lang-JP { content: url(../img/lang/JP.png); }
 div.date-control { padding-right: 0px; display: flex; }
+.table td, .table th { padding: .5rem .5rem; }
+#app { display: flex; flex-direction: column; }
+
+.swal-custom-dialog-style {
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+.swal-custom-dialog-title {
+	text-align: left;
+	padding-left: 1rem;
+	padding-top: 1rem;
+}

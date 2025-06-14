@@ -1,10 +1,10 @@
 <template>
-<div class="header-layer">
+<div class="header-layer" v-show="visible">
     <nav class="program-controlbar navbar navbar-expand-sm navbar-top navbar-header-title">
         <h1 class="page-header-title"><div class="navbar-header"><label>{{ labels.caption_title }}</label></div></h1>
         <ul class="navbar-nav navbar-right ml-auto program-control-layer">
-          <li class="dropdown user-dropdown"><A href="javascript:void(0)" class="program-linker dropdown-toggle" data-toggle="dropdown"><span>{{ pageId }}</span></A>
-            <ul class="dropdown-menu dropdown-menu-right page-header-menu" v-if="displayMenu">
+          <li class="dropdown user-dropdown"><A href="javascript:void(0)" class="program-linker dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown"><span>{{ pageId }}</span></A>
+            <ul class="dropdown-menu dropdown-menu-right dropdown-menu-end page-header-menu" v-if="displayMenu">
               <slot></slot>
               <template v-if="displayLanguage">
               <li v-for="item in multiLanguages" :key="item.lang"><a href="javascript:void(0)" @click="changeLanguage(item.lang)" class="pagemenu-linker"><img class="img-lang" :class="'img-lang-' + item.lang" />&nbsp;<span :class="{'item-selected' : currentLanguage == item.lang}">{{ labels[item.label] }}</span></a></li>
@@ -30,6 +30,10 @@ export default {
   props: {
     pid: String,
     labels: Object,
+    visible: {
+      type: [String,Boolean],
+      default: true,
+    },    
     version: {
       type: String,
       default: "1.0.0",

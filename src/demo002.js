@@ -4,6 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "jquery-ui-dist/jquery-ui.css";
 import "bootstrap";
 import "bootbox";
+import 'sweetalert2/src/sweetalert2.scss'
 import "./assets/jquery/js/jquery.maskedinput.js";
 import "./assets/clockpicker/bootstrap-clockpicker.js";
 import "./assets/clockpicker/bootstrap-clockpicker.css";
