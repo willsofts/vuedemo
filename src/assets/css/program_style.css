@@ -29,7 +29,7 @@ div.sub-col-25 { margin-left: 25px; }
 div.sub-col-50 { margin-left: 50px; }
 div.sub-col-75 { margin-left: 75px; }
 div.sub-col-100 { margin-left: 100px; }
-.partition-label { background-color: #A95805; font-size: 20px; }
+.partition-label { font-size: 20px; }
 .sub-partition-label { font-size: 20px; text-decoration: underline; }
 table.inner-table-class tr { height: 60px; }
 td.inner-column-left { vertical-align:top; padding-top: 15px; padding-right: 25px; }
@@ -38,8 +38,14 @@ td.inner-column-right { vertical-align:top; padding-top: 15px; }
 input[type=checkbox] { height: 20px; width: 20px; }
 input[type=radio] { height: 20px; width: 20px; }
 .input-table-layer { margin-left: 5px; }
-#insertbutton { margin-top: 5px; margin-right: 10px; min-width: 100px; }
-#searchbutton { margin-top: 5px; margin-right: 30px; min-width: 100px; }
+#insertbutton { min-width: 90px; }
+#insertbuttonnum { min-width: 90px; }
+#searchbutton { margin-right: 30px; min-width: 90px; }
+#resetbutton { min-width: 90px; }
+#savebutton { min-width: 90px; }
+#updatebutton { min-width: 90px; }
+#cancelbutton { min-width: 90px; }
+#canceldialogbutton { min-width: 90px; }
 a.image-file-linker { vertical-align: top; margin-right: 2px;}
 .display-group { white-space: nowrap; }
 #fs_completedcontrollayer {
@@ -92,8 +98,6 @@ div.entry-key-layer { padding: 5px; }
 .pt-page th a { color: white; }
 .pt-page th a:hover, a:focus { color: #FF9933; }
 
-/*.input-group-container { width: 90% }*/
-/*div.fa-portal-area { margin-left:15px; padding-top: 10px; padding-left: 5px; padding-bottom:15px; }*/
 div.fa-list-panel { margin-top: 8px; }
 .fschaptertablelayer { text-align: center; }
 .fschaptertable { margin: auto; }
@@ -101,3 +105,16 @@ div.fa-list-panel { margin-top: 8px; }
 .fa-no-wraper { white-space: nowrap; }
 .fa-boxer { display: flex; align-items: center; justify-content: center; }
 .fa-partition-toggle { margin-left: 2px; margin-right: 2px; }
+
+button.btn-closing:before { 
+	font-family: FontAwesome;
+	content: "\f00d";
+	color: black;	
+}
+button.btn-close:before { 
+	font-family: FontAwesome;
+	content: "\f00d";	
+	color: black;
+}
+button.close { color: white; }
+button.close:hover { color: white; }
