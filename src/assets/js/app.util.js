@@ -191,14 +191,14 @@ export function alertbox(errcode, callback, defaultmsg, params, addonmsg, title,
 		}
 	}
 }
-export function alertDialog(msg, callbackfn, title="Alert", icon="fa fa-bell-o") {
+export function alertDialog(msg, callbackfn, title="Alert", icon="fa fa-bell-o fas fa-bell") {
 	if(getMetaInfo().DIALOG_TYPE == "SWAL") {
 		alertDialogSweetAlert(msg,callbackfn,title,icon);
 	} else {
 		alertDialogBootBox(msg,callbackfn,title,icon);
 	}
 }
-export function alertDialogBootBox(msg, callbackfn, title="Alert", icon="fa fa-bell-o") {
+export function alertDialogBootBox(msg, callbackfn, title="Alert", icon="fa fa-bell-o fas fa-bell") {
 	if(!msg) { console.log("alertDialog: msg undefined"); return; }
 	try {
 		let fs_okbtn = getMessageCode("fsokbtn"); if(!fs_okbtn || (fs_okbtn=="" || fs_okbtn=="fsokbtn")) fs_okbtn = "OK";
@@ -217,7 +217,7 @@ export function alertDialogBootBox(msg, callbackfn, title="Alert", icon="fa fa-b
     } catch (ex) { console.error(ex); }
     if (callbackfn) callbackfn();
 }
-export function alertDialogSweetAlert(msg, callbackfn, title="Alert", icon="fa fa-bell-o") {
+export function alertDialogSweetAlert(msg, callbackfn, title="Alert", icon="fa fa-bell-o fas fa-bell") {
 	if(!msg) { console.log("alertDialog: msg undefined"); return; }
 	try {
 		let fs_okbtn = getMessageCode("fsokbtn"); if(!fs_okbtn || (fs_okbtn=="" || fs_okbtn=="fsokbtn")) fs_okbtn = "OK";
@@ -264,14 +264,14 @@ export function confirmbox(errcode, okFn, cancelFn, defaultmsg, params, addonmsg
 		}
 	}
 }
-export function confirmDialog(msg, okCallback, cancelCallback, title="Confirmation", icon="fa fa-question-circle") {
+export function confirmDialog(msg, okCallback, cancelCallback, title="Confirmation", icon="fas fa fa-question-circle") {
 	if(getMetaInfo().DIALOG_TYPE == "SWAL") {
 		confirmDialogSweetAlert(msg,okCallback,cancelCallback,title,icon);
 	} else {
 		confirmDialogBootBox(msg,okCallback,cancelCallback,title,icon);
 	}
 }
-export function confirmDialogBootBox(msg, okCallback, cancelCallback, title="Confirmation", icon="fa fa-question-circle") {
+export function confirmDialogBootBox(msg, okCallback, cancelCallback, title="Confirmation", icon="fas fa fa-question-circle") {
 	try {
 		let fs_confirmbtn = getMessageCode("fsconfirmbtn"); if(!fs_confirmbtn || (fs_confirmbtn=="" || fs_confirmbtn=="fsconfirmbtn")) fs_confirmbtn = "OK";
 		let fs_cancelbtn = getMessageCode("fscancelbtn"); if(!fs_cancelbtn || (fs_cancelbtn=="" || fs_cancelbtn=="fscancelbtn")) fs_cancelbtn = "Cancel";		
@@ -296,7 +296,7 @@ export function confirmDialogBootBox(msg, okCallback, cancelCallback, title="Con
     } catch (ex) { console.log(ex.description); }
 	return true;
 }
-export function confirmDialogSweetAlert(msg, okCallback, cancelCallback, title="Confirmation", icon="fa fa-question-circle") {
+export function confirmDialogSweetAlert(msg, okCallback, cancelCallback, title="Confirmation", icon="fas fa fa-question-circle") {
 	try {
 		let fs_confirmbtn = getMessageCode("fsconfirmbtn"); if(!fs_confirmbtn || (fs_confirmbtn=="" || fs_confirmbtn=="fsconfirmbtn")) fs_confirmbtn = "OK";
 		let fs_cancelbtn = getMessageCode("fscancelbtn"); if(!fs_cancelbtn || (fs_cancelbtn=="" || fs_cancelbtn=="fscancelbtn")) fs_cancelbtn = "Cancel";
