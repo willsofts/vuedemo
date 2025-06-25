@@ -3,7 +3,7 @@ const appVariables = {
     BASE_URL: "http://localhost:8080",
 	IMG_URL: "http://localhost:8080",
     MULTI_LANGUAGES: ["EN","TH"],
-    META_INFO: { DIALOG_TYPE: "BB", DISPLAY_PAGE_HEADER: "true" }
+    META_INFO: { DIALOG_TYPE: "BB", DISPLAY_PAGE_HEADER: "true", LOAD_LABEL: true }
 };
 function getAppConfigs() {
     return appVariables;
