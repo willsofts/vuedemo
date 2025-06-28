@@ -201,7 +201,7 @@ export function alertDialog(msg, callbackfn, title="Alert", icon="fa fa-bell-o f
 export function alertDialogBootBox(msg, callbackfn, title="Alert", icon="fa fa-bell-o fas fa-bell") {
 	if(!msg) { console.log("alertDialog: msg undefined"); return; }
 	try {
-		let fs_okbtn = getMessageCode("fsokbtn"); if(!fs_okbtn || (fs_okbtn=="" || fs_okbtn=="fsokbtn")) fs_okbtn = "OK";
+		let fs_okbtn = getMessageCode("fsokbtn",null,"OK"); 
 		bootbox.alert({
 			title: "<em class='"+icon+"'></em>&nbsp;<label>"+title+"</label>",
 			message: msg,
@@ -220,7 +220,7 @@ export function alertDialogBootBox(msg, callbackfn, title="Alert", icon="fa fa-b
 export function alertDialogSweetAlert(msg, callbackfn, title="Alert", icon="fa fa-bell-o fas fa-bell") {
 	if(!msg) { console.log("alertDialog: msg undefined"); return; }
 	try {
-		let fs_okbtn = getMessageCode("fsokbtn"); if(!fs_okbtn || (fs_okbtn=="" || fs_okbtn=="fsokbtn")) fs_okbtn = "OK";
+		let fs_okbtn = getMessageCode("fsokbtn",null,"OK"); 
 		Swal.fire({
 			title: "<em class='"+icon+"'></em>&nbsp;<label>"+title+"</label>",
 			text: msg,
@@ -273,8 +273,8 @@ export function confirmDialog(msg, okCallback, cancelCallback, title="Confirmati
 }
 export function confirmDialogBootBox(msg, okCallback, cancelCallback, title="Confirmation", icon="fas fa fa-question-circle") {
 	try {
-		let fs_confirmbtn = getMessageCode("fsconfirmbtn"); if(!fs_confirmbtn || (fs_confirmbtn=="" || fs_confirmbtn=="fsconfirmbtn")) fs_confirmbtn = "OK";
-		let fs_cancelbtn = getMessageCode("fscancelbtn"); if(!fs_cancelbtn || (fs_cancelbtn=="" || fs_cancelbtn=="fscancelbtn")) fs_cancelbtn = "Cancel";		
+		let fs_confirmbtn = getMessageCode("fsconfirmbtn",null,"OK"); 
+		let fs_cancelbtn = getMessageCode("fscancelbtn",null,"Cancel"); 
 		bootbox.confirm({
 			title: "<em class='"+icon+"'></em>&nbsp;<label>"+title+"</label>",
 			message: msg, 
@@ -298,8 +298,8 @@ export function confirmDialogBootBox(msg, okCallback, cancelCallback, title="Con
 }
 export function confirmDialogSweetAlert(msg, okCallback, cancelCallback, title="Confirmation", icon="fas fa fa-question-circle") {
 	try {
-		let fs_confirmbtn = getMessageCode("fsconfirmbtn"); if(!fs_confirmbtn || (fs_confirmbtn=="" || fs_confirmbtn=="fsconfirmbtn")) fs_confirmbtn = "OK";
-		let fs_cancelbtn = getMessageCode("fscancelbtn"); if(!fs_cancelbtn || (fs_cancelbtn=="" || fs_cancelbtn=="fscancelbtn")) fs_cancelbtn = "Cancel";
+		let fs_confirmbtn = getMessageCode("fsconfirmbtn",null,"OK"); 
+		let fs_cancelbtn = getMessageCode("fscancelbtn",null,"Cancel"); 
 		Swal.fire({
 			title: "<em class='"+icon+"'></em>&nbsp;<label>"+title+"</label>",
 			text: msg,

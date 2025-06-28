@@ -1,6 +1,7 @@
 import $ from "jquery";
 import { getDefaultLanguage, getDefaultLabels, getProgramLabels, getApiUrl, DEFAULT_CONTENT_TYPE, getMetaInfo } from "./app.info";
-import { getAccessorToken } from "./messenger";
+import { getAccessorToken, getStorage, setStorage } from "./messenger";
+import { loadAndMergeMessageCode } from "./msg.util";
 
 export function getLabel(name, defaultLabel, lang = getDefaultLanguage()) {
     let result = undefined;
@@ -76,11 +77,23 @@ function getApiLabel() {
 }
 
 export function loadAndMergeLabel(id, callback, loadLabel = String(getMetaInfo()?.LOAD_LABEL)=="true", url = getApiLabel()) {
+    loadAndMergeProgramLabel(id,callback,loadLabel,url);
+    loadAndMergeMessageCode();
+}
+
+export function loadAndMergeProgramLabel(id, callback, loadLabel = String(getMetaInfo()?.LOAD_LABEL)=="true", url = getApiLabel()) {
     if(!loadLabel) return;
+    let label_cached = getStorage(id);
+    if(label_cached) {
+        let merged = mergeProgramLabels(label_cached);
+        if(merged && callback) callback(true,label_cached);
+        return;
+    }
     fetchLabel(id,function(success,data) {
         if(success) {
+            setStorage(id,data.body);
             let merged = mergeProgramLabels(data.body);
-            if(merged && callback) callback(success,data);
+            if(merged && callback) callback(success,data.body);
         }
     },url);
 }
